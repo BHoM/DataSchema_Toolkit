@@ -27,9 +27,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BH.Adapter.SoftwareName
+namespace BH.Adapter.DataSchema
 {
-    public partial class SoftwareNameAdapter : BHoMAdapter
+    public partial class DataSchemaAdapter : BHoMAdapter
     {
         // Basic Delete method that deletes objects depending on their Type and Id. 
         // It gets called by the Push or by the Remove Adapter Actions.
