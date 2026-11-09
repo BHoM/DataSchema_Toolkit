@@ -22,7 +22,6 @@
 
 using BH.oM.Base;
 using BH.oM.Base.Attributes;
-using BH.oM.Quantities.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,7 +51,6 @@ namespace BH.oM.DataSchema
                      "Derivation: Classify each element by keyword rules, checked in order against Type Name, Name, BHE_Material and Structural Material. Sum Volume per material for elements whose base (MinZ) is at or above ground level, excluding Structural Foundations. With no basement, all non-foundation elements count. " +
                      "Edge cases: Elements crossing ground level are assigned by their base, so a basement-to-L1 column counts wholly below ground. Composite materials store concrete and steel as one volume. Rarely, non-structural elements are included, usually under Other. Short keywords match anywhere in a name (e.g. w, pc, rc) and can misclassify; word-boundary matching proposed. Keys use the detailed material vocabulary, which differs from the element TypicalMaterial (e.g. Steel vs Steel - Hot Rolled). Reinforcement is not captured separately. " +
                      "Aliases: material quantities, material take-off, MTO.")]
-        [Volume]
         public virtual Dictionary<string, double> MaterialVolumesAboveGround { get; set; }
 
         [DisplayText("Material volumes below ground")]
@@ -61,7 +59,6 @@ namespace BH.oM.DataSchema
                      "Derivation: Elements whose base is below ground level, plus all Structural Foundations wherever they sit. " +
                      "Edge cases: With no basement, this holds foundations only; ground beams modelled as framing count as above ground. Same keyword and composite caveats as MaterialVolumesAboveGround. " +
                      "Aliases: substructure quantities, below-ground MTO.")]
-        [Volume]
         public virtual Dictionary<string, double> MaterialVolumesBelowGround { get; set; }
     }
 }

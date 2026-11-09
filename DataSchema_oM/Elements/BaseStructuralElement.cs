@@ -22,7 +22,6 @@
 
 using BH.oM.Base;
 using BH.oM.Base.Attributes;
-using BH.oM.Physical;
 using BH.oM.DataSchema.Enums;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ using System.ComponentModel;
 namespace BH.oM.DataSchema.Elements
 {
     [Description("Base class of the structural element types of a building (column, beam, slab, roof and pile foundation): the properties they share.")]
-    public abstract class BaseStructuralElement : BHoMObject, IPhysical
+    public abstract class BaseStructuralElement : BHoMObject
     {
         [DisplayText("Refurbishment")]
         [Description("True when the building retains existing structure (refurbishment or retrofit) rather than being wholly new-build; false when no existing structure is retained. " +
@@ -39,14 +38,6 @@ namespace BH.oM.DataSchema.Elements
                      "Edge cases: Retained frames with no modelled demolition currently read as false; 63NBS is the only true value in the dataset. Same value on every subclass for now. " +
                      "Aliases: retrofit, refurb, existing building reuse, retained structure.")]
         public virtual bool? IsRefurbished { get; set; }
-
-        [DisplayText("Typical material")]
-        [Description("The predominant material of this element type in the building. " +
-                     "Used by Column and Beam only. " +
-                     "Derivation: Column: most frequent material by count among columns at least 60% of slab-to-slab height. Beam: material with the largest total plan length on suspended floors. " +
-                     "Edge cases: Columns become Concrete - In-Situ when the slab is concrete and RC columns number at least 80% of the steel columns. Beams become Concrete - In-Situ when the columns are concrete and concrete beams are at least a third of the beam length. " +
-                     "Aliases: frame material, primary material.")]
-        public virtual StructuralMaterial? TypicalMaterial { get; set; }
 
         [DisplayText("Typical size")]
         [Description("The Revit type name of the representative member of this element type, e.g. a section designation or slab description. " +

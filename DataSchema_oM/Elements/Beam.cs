@@ -22,6 +22,7 @@
 
 using BH.oM.Base;
 using BH.oM.Base.Attributes;
+using BH.oM.DataSchema.Enums;
 using System;
 using System.ComponentModel;
 
@@ -30,6 +31,14 @@ namespace BH.oM.DataSchema.Elements
     [Description("The beams of a building: typical material, size and count per floor.")]
     public class Beam : BaseStructuralElement
     {
+        [DisplayText("Typical material")]
+        [Description("The predominant material of this element type in the building. " +
+                     "" +
+                     "Derivation: Column: most frequent material by count among columns at least 60% of slab-to-slab height. Beam: material with the largest total plan length on suspended floors. " +
+                     "Edge cases: Columns become Concrete - In-Situ when the slab is concrete and RC columns number at least 80% of the steel columns. Beams become Concrete - In-Situ when the columns are concrete and concrete beams are at least a third of the beam length. " +
+                     "Aliases: frame material, primary material.")]
+        public virtual StructuralMaterial? TypicalMaterial { get; set; }
+
         [DisplayText("Typical beams per floor")]
         [Description("Median number of beam elements per level, across all levels that have beams. " +
                      "Derivation: Each beam is assigned to the nearest raw Revit level by its underside; beams are counted per level and the median taken over levels that have beams. All materials and beam types are included (primary, secondary, edge, lintels, ground beams) on every level, including roof and basement. " +

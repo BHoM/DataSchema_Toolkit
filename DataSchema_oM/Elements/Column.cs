@@ -22,6 +22,7 @@
 
 using BH.oM.Base;
 using BH.oM.Base.Attributes;
+using BH.oM.DataSchema.Enums;
 using System;
 using System.ComponentModel;
 
@@ -30,6 +31,14 @@ namespace BH.oM.DataSchema.Elements
     [Description("The columns of a building: typical material, size and count per floor.")]
     public class Column : BaseStructuralElement
     {
+        [DisplayText("Typical material")]
+        [Description("The predominant material of this element type in the building. " +
+                     "" +
+                     "Derivation: Column: most frequent material by count among columns at least 60% of slab-to-slab height. Beam: material with the largest total plan length on suspended floors. " +
+                     "Edge cases: Columns become Concrete - In-Situ when the slab is concrete and RC columns number at least 80% of the steel columns. Beams become Concrete - In-Situ when the columns are concrete and concrete beams are at least a third of the beam length. " +
+                     "Aliases: frame material, primary material.")]
+        public virtual StructuralMaterial? TypicalMaterial { get; set; }
+
         [DisplayText("Typical columns per floor")]
         [Description("Median number of columns crossing each floor, from ground up to the floor below the roof. " +
                      "Derivation: At each merged floor level from ground up to the floor below the roof, count the columns crossing a horizontal plane 1.0 m above the floor; a column through several storeys counts on each. Excludes columns shorter than 60% of slab-to-slab height, and thin posts (HSS, SHS, RHS, CHS or WP up to 110 mm thick) unless they are the most common type. Median across floors. Only the typical material is counted unless it is under 50% of all columns, in which case all are counted. " +
