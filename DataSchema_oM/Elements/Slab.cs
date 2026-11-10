@@ -25,6 +25,7 @@ using BH.oM.Base.Attributes;
 using BH.oM.Quantities.Attributes;
 using BH.oM.DataSchema.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace BH.oM.DataSchema.Elements
@@ -46,5 +47,14 @@ namespace BH.oM.DataSchema.Elements
                      "Aliases: slab thickness, slab depth, topping depth for composite.")]
         [Length]
         public virtual double? TypicalTypeDepth { get; set; }
+
+        [DisplayText("Slab area of each slab type")]
+        [Description("Breakdown of the slabs by type: the total area of each slab type. Unit: m\u00B2 per key. " +
+                     "Null when there are no elements. " +
+                     "Dictionary keys: the SlabType values (the slab TypicalType values). " +
+                     "Derivation: Total area per slab type, non-roof slabs only. " +
+                     "Edge cases: Not volume; use Building.MaterialVolumesAboveGround and MaterialVolumesBelowGround for m\u00B3. " +
+                     "Aliases: material split, material breakdown.")]
+        public virtual Dictionary<SlabType, double> MaterialDistribution { get; set; }
     }
 }

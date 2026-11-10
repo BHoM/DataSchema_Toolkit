@@ -24,6 +24,7 @@ using BH.oM.Base;
 using BH.oM.Base.Attributes;
 using BH.oM.DataSchema.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace BH.oM.DataSchema.Elements
@@ -33,7 +34,6 @@ namespace BH.oM.DataSchema.Elements
     {
         [DisplayText("Typical material")]
         [Description("The predominant material of this element type in the building. " +
-                     "" +
                      "Derivation: Column: most frequent material by count among columns at least 60% of slab-to-slab height. Beam: material with the largest total plan length on suspended floors. " +
                      "Edge cases: Columns become Concrete - In-Situ when the slab is concrete and RC columns number at least 80% of the steel columns. Beams become Concrete - In-Situ when the columns are concrete and concrete beams are at least a third of the beam length. " +
                      "Aliases: frame material, primary material.")]
@@ -45,5 +45,14 @@ namespace BH.oM.DataSchema.Elements
                      "Edge cases: Median. Raw Revit levels are used, so split levels are counted separately (unlike the column count). Counts Revit elements, so a continuous beam modelled in segments counts several times. " +
                      "Aliases: beams per floor, beam count per floor.")]
         public virtual int? TypicalCountPerSlab { get; set; }
+
+        [DisplayText("Number of beams of each material")]
+        [Description("Breakdown of the beams by material: the number of beams of each material. Unit: count per key. " +
+                     "Null when there are no elements. " +
+                     "Dictionary keys: the StructuralMaterial values (the TypicalMaterial values). " +
+                     "Derivation: Count per material, all beams. " +
+                     "Edge cases: Not volume; use Building.MaterialVolumesAboveGround and MaterialVolumesBelowGround for m\u00B3. Beam counts include all beams. " +
+                     "Aliases: material split, material breakdown.")]
+        public virtual Dictionary<StructuralMaterial, double> MaterialDistribution { get; set; }
     }
 }

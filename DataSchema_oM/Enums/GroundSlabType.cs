@@ -20,7 +20,6 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.
  */
 
-using BH.oM.Base.Attributes;
 using System.ComponentModel;
 
 namespace BH.oM.DataSchema.Enums
@@ -28,11 +27,9 @@ namespace BH.oM.DataSchema.Enums
     [Description("Whether the lowest slab in a building bears on the ground or is suspended.")]
     public enum GroundSlabType
     {
-        [DisplayText("Ground Bearing")]
         [Description("Ground Bearing: Default, unless the lowest slabs are named suspended without a ground-slab keyword.")]
         GroundBearing,
 
-        [DisplayText("Suspended Slab")]
         [Description("Suspended Slab: Lowest slabs named suspended, with no ground-slab keyword.")]
         SuspendedSlab,
     }

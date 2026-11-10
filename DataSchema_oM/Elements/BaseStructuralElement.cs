@@ -24,7 +24,6 @@ using BH.oM.Base;
 using BH.oM.Base.Attributes;
 using BH.oM.DataSchema.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace BH.oM.DataSchema.Elements
@@ -52,14 +51,5 @@ namespace BH.oM.DataSchema.Elements
                      "Edge cases: Slab type comes from the single largest type name, not the largest total area per type. PileFoundation also holds non-piled foundations (pads, rafts). Some piled foundations are not drawn as 3D objects and are therefore not counted. " +
                      "Aliases: slab type, floor type, roof type, foundation type.")]
         public virtual StructuralElementType? TypicalType { get; set; }
-
-        [DisplayText("Material distribution")]
-        [Description("Breakdown of this element type by material or type. The unit depends on the subclass: count (Column, Beam) or m\u00B2 (Slab). " +
-                     "Null when there are no elements, and for Roof and PileFoundation. " +
-                     "Dictionary keys: the TypicalMaterial values (Column, Beam) or the slab TypicalType values (Slab). " +
-                     "Derivation: Column: count per material among columns at least 60% of slab-to-slab height. Beam: count per material, all beams. Slab: total area per slab type, non-roof slabs only. " +
-                     "Edge cases: Not volume; use Building.MaterialVolumes for m\u00B3. Beam counts include all beams; column counts include thin posts, even if not structural. " +
-                     "Aliases: material split, material breakdown.")]
-        public virtual Dictionary<string, double> MaterialDistribution { get; set; }
     }
 }
