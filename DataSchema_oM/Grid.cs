@@ -46,8 +46,5 @@ namespace BH.oM.DataSchema
                      "Aliases: column grid, grid spacing, bay size, bay depth.")]
         [Length]
         public virtual double? TypicalYSpacing { get; set; }
-
-        [Description("A field added to test the sync.")]
-        public virtual int SyncTestField { get; set; } = 0;
     }
 }
