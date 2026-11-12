@@ -48,6 +48,6 @@ namespace BH.oM.DataSchema
         public virtual double? TypicalYSpacing { get; set; }
 
         [Description("A field added to test the sync.")]
-        public virtual string SyncTestField { get; set; } = "";
+        public virtual int SyncTestField { get; set; } = 0;
     }
 }
